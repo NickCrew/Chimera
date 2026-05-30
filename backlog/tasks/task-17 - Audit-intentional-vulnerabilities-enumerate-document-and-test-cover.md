@@ -1,10 +1,11 @@
 ---
 id: TASK-17
 title: 'Audit intentional vulnerabilities: enumerate, document, and test-cover'
-status: To Do
-assignee: []
+status: In Progress
+assignee:
+  - '@codex'
 created_date: '2026-04-30 10:33'
-updated_date: '2026-04-30 10:38'
+updated_date: '2026-05-30 01:42'
 labels:
   - security
   - docs
@@ -91,10 +92,10 @@ Adding the CHM-ID as a marker argument lets registry and tests cross-reference a
 ## Acceptance Criteria
 <!-- AC:BEGIN -->
 - [x] #1 #1 Phase 1 enumeration produces a structured report comparing source-found vulns to VULN_REGISTRY entries
-- [ ] #2 #2 Phase 2 reconciliation closes drift between VULN_REGISTRY and docs/vulnerability-inventory.md
+- [x] #2 #2 Phase 2 reconciliation closes drift between VULN_REGISTRY and docs/vulnerability-inventory.md
 - [ ] #3 #3 Phase 3 produces a coverage matrix of registered vulns × tests with severity-tagged gaps
 - [ ] #4 #4 Phase 4 remediation plan filed (either inline fixes or follow-up Backlog tasks per finding)
-- [ ] #5 #5 docs/vulnerability-inventory.md final count agrees with VULN_REGISTRY size to within ±5
+- [x] #5 #5 docs/vulnerability-inventory.md final count agrees with VULN_REGISTRY size to within ±5
 - [ ] #6 #6 Every critical and high severity registry entry has at least one @pytest.mark.vulnerability test asserting exploitability
 <!-- AC:END -->
 
@@ -184,4 +185,6 @@ The decorator is the supported mechanism for runtime-toggling vulnerabilities (t
 
 ### Data files / artifacts
 None saved to disk. All findings derived from greps + the sub-agent's report.
+
+Phase 2 reconciliation complete: docs/vulnerability-inventory.md now treats apps/vuln-api/app/utils/vuln_registry.py as the counted source of truth, lists all 29 CHM-ID registry entries, updates severity/category/OWASP counts to match the registry, and documents remaining code/registry drift instead of counting unregistered findings. Validation: AST parse found registry_count=29, doc_catalog_count=29, missing_in_doc=[], extra_in_doc=[], severity_counts=critical:12, high:15, medium:2; docs build passed with bundle exec jekyll build from docs/.
 <!-- SECTION:NOTES:END -->
