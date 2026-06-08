@@ -1,10 +1,3 @@
----
-id: doc-2
-title: Apparatus Integration Checklist
-type: planning
-created_date: '2026-03-16 00:19'
----
-
 ## Summary
 
 Plan the first production-shaped Chimera to Apparatus integration as a service-to-service connection rather than a monorepo merge. Chimera web should talk to Chimera API, and Chimera API should act as the facade for Apparatus.

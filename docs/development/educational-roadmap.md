@@ -1,9 +1,3 @@
----
-id: doc-1
-title: Educational Roadmap
-type: other
-created_date: '2026-03-12 04:10'
----
 # Chimera Educational Roadmap
 
 This document outlines the strategic initiatives to transform Chimera from a vulnerable application sandbox into a guided learning platform for security engineering.
