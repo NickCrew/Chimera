@@ -125,9 +125,13 @@ async def refund_request(request: Request):
 @checkout_router.route('/api/checkout/methods', methods=['GET'])
 async def checkout_methods(request: Request):
     """Get available checkout payment methods."""
+    # payment_methods_db also holds non-method entries (e.g. 'authorizations' sub-store);
+    # filter to only flat payment-method records that carry 'enabled' and 'processing_fee'.
+    methods = {k: v for k, v in payment_methods_db.items()
+               if isinstance(v, dict) and 'enabled' in v and 'processing_fee' in v}
     return JSONResponse(
         {
-            'available_methods': list(payment_methods_db.keys()),
+            'available_methods': list(methods.keys()),
             'methods_detail': [
                 {
                     'method': method,
@@ -135,7 +139,7 @@ async def checkout_methods(request: Request):
                     'processing_fee': details['processing_fee'],
                     'fee_percentage': details['processing_fee'] * 100,
                 }
-                for method, details in payment_methods_db.items()
+                for method, details in methods.items()
             ],
             'default_method': 'visa',
             'supports_saved_methods': True,
